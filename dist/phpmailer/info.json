@@ -1,0 +1,16 @@
+{
+  "name": "PHPMailer",
+  "description": "Add support for emails to be sent out via PHPMailer, use PHPMailer v6.0.5",
+  "version": "1.0.0",
+  "author": {
+	"name": "Dan Walker",
+	"website": "https://danrwalker.co.uk",
+	"email": "contact@twistphp.com",
+	"git": "",
+	"bugs": ""
+  },
+  "thirdparty": {
+	"info": "PHPMailer PHP Library",
+	"website": "https://github.com/PHPMailer/PHPMailer"
+  }
+}

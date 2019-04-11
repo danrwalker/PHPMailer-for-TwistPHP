@@ -1,0 +1,50 @@
+{
+  "PHPMAILER_SMTP_HOST":{
+	"title":"SMTP Host",
+	"description":"Set the SMTP Host needed to login to the SMTP email server",
+	"default":"localhost",
+	"type":"string",
+	"options":"",
+	"null":0
+  },
+  "PHPMAILER_SMTP_PORT":{
+	"title":"SMTP Port",
+	"description":"Set the SMTP Port (Default: 465) needed to login to the SMTP email server",
+	"default":465,
+	"type":"integer",
+	"options":"",
+	"null":0
+  },
+  "PHPMAILER_SMTP_SECURITY":{
+	"title":"SMTP SECURITY",
+	"description":"Set the SMTP Security protocol to use when sending SSL, TLS or NONE",
+	"default":"tls",
+	"type":"integer",
+	"options":"none,ssl,tls",
+	"null":0
+  },
+  "PHPMAILER_SMTP_USERNAME":{
+	"title":"SMTP Username",
+	"description":"Set the SMTP Username (usually an email address) needed to login to the SMTP email server",
+	"default":"",
+	"type":"string",
+	"options":"",
+	"null":0
+  },
+  "PHPMAILER_SMTP_PASSWORD":{
+	"title":"SMTP Password",
+	"description":"Set the SMTP Password needed to login to the SMTP email server",
+	"default":"",
+	"type":"string",
+	"options":"",
+	"null":0
+  },
+  "PHPMAILER_SMTP_FROM_ADDRESS":{
+	"title":"SMTP From Address",
+	"description":"Email Address that the email will be sent from",
+	"default":"",
+	"type":"string",
+	"options":"",
+	"null":0
+  }
+}
