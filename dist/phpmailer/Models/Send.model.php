@@ -54,7 +54,10 @@
 					}
 
 					$resPHPMailer->SetFrom($arrSettings['from']);
-					$resPHPMailer->addReplyTo($arrEmailData['reply_to']);
+
+					if(isset($arrEmailData['reply_to']) && $arrEmailData['reply_to'] != ''){
+						$resPHPMailer->addReplyTo($arrEmailData['reply_to']);
+					}
 
 					if(array_key_exists('to',$arrEmailData) && is_array($arrEmailData['to']) && count($arrEmailData['to']) > 0){
 						foreach($arrEmailData['to'] as $strEmailAddress => $strName){
