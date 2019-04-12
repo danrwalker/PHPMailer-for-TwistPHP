@@ -23,7 +23,7 @@
 				'security' => \Twist::framework()->setting('PHPMAILER_SMTP_SECURITY'),
 				'username' => \Twist::framework()->setting('PHPMAILER_SMTP_USERNAME'),
 				'password' => \Twist::framework()->setting('PHPMAILER_SMTP_PASSWORD'),
-				'from' => \Twist::framework()->setting('PHPMAILER_SMTP_FROM')
+				'from' => \Twist::framework()->setting('PHPMAILER_SMTP_FROM_ADDRESS')
 			);
 
 			if(self::checkCredentials($arrSettings)){
@@ -75,7 +75,9 @@
 					}
 
 					//$resPHPMailer->SMTPDebug  = 3;
-					//$resPHPMailer->Debugoutput = function($str, $level) {echo "debug level $level; message: $str";}; $mail->Debugoutput = 'echo';
+					//$resPHPMailer->Debugoutput = function($str, $level) {echo "debug level $level; message: $str";};
+					//$resPHPMailer->Debugoutput = 'echo';
+
 					$resPHPMailer->IsHTML(true);
 
 					$resPHPMailer->Subject = $arrEmailData['subject'];
@@ -92,7 +94,7 @@
 				}catch(\PHPMailer\PHPMailer\Exception $resException){
 
 					//Handle the exception here
-
+					echo $resException->getMessage();
 					$blStatus = false;
 				}
 			}

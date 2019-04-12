@@ -19,7 +19,7 @@
 	"title":"SMTP SECURITY",
 	"description":"Set the SMTP Security protocol to use when sending SSL, TLS or NONE",
 	"default":"tls",
-	"type":"integer",
+	"type":"options",
 	"options":"none,ssl,tls",
 	"null":0
   },
