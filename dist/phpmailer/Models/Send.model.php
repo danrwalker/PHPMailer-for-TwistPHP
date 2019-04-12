@@ -34,8 +34,8 @@
 				require_once TWIST_PACKAGES.'/phpmailer/ThirdParty/PHPMailer/src/SMTP.php';
 				require_once TWIST_PACKAGES.'/phpmailer/ThirdParty/PHPMailer/src/Exception.php';
 
-				$arrEmailData = $resEmail->data();
 				$arrEmailSource = $resEmail->source();
+				$arrEmailData = $resEmail->data();
 
 				$resPHPMailer = new \PHPMailer\PHPMailer\PHPMailer(true);
 
@@ -45,9 +45,13 @@
 					$resPHPMailer->Host = $arrSettings['host'];
 					$resPHPMailer->Port = $arrSettings['port'];
 					$resPHPMailer->SMTPSecure = $arrSettings['security'];
-					$resPHPMailer->SMTPAuth = true;
-					$resPHPMailer->Username = $arrSettings['username'];
-					$resPHPMailer->Password = $arrSettings['password'];
+
+					//If Username and/or Password has been set enable auth
+					if($arrSettings['username'] != '' || $arrSettings['password'] != ''){
+						$resPHPMailer->SMTPAuth = true;
+						$resPHPMailer->Username = $arrSettings['username'];
+						$resPHPMailer->Password = $arrSettings['password'];
+					}
 
 					$resPHPMailer->SetFrom($arrSettings['from']);
 					$resPHPMailer->addReplyTo($arrEmailData['reply_to']);
@@ -72,7 +76,6 @@
 
 					//$resPHPMailer->SMTPDebug  = 3;
 					//$resPHPMailer->Debugoutput = function($str, $level) {echo "debug level $level; message: $str";}; $mail->Debugoutput = 'echo';
-
 					$resPHPMailer->IsHTML(true);
 
 					$resPHPMailer->Subject = $arrEmailData['subject'];
