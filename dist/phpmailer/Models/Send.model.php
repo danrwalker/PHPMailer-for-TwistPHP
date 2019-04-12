@@ -34,6 +34,7 @@
 				require_once TWIST_PACKAGES.'/phpmailer/ThirdParty/PHPMailer/src/SMTP.php';
 				require_once TWIST_PACKAGES.'/phpmailer/ThirdParty/PHPMailer/src/Exception.php';
 
+				$arrEmailData = $resEmail->data();
 				$arrEmailSource = $resEmail->source();
 
 				$resPHPMailer = new \PHPMailer\PHPMailer\PHPMailer(true);
@@ -49,22 +50,22 @@
 					$resPHPMailer->Password = $arrSettings['password'];
 
 					$resPHPMailer->SetFrom($arrSettings['from']);
-					$resPHPMailer->addReplyTo($resEmail->arrEmailData['reply_to'], 'Information');
+					$resPHPMailer->addReplyTo($arrEmailData['reply_to']);
 
-					if(array_key_exists('to',$resEmail->arrEmailData) && is_array($resEmail->arrEmailData['to']) && count($resEmail->arrEmailData['to']) > 0){
-						foreach($resEmail->arrEmailData['to'] as $strEmailAddress => $strName){
+					if(array_key_exists('to',$arrEmailData) && is_array($arrEmailData['to']) && count($arrEmailData['to']) > 0){
+						foreach($arrEmailData['to'] as $strEmailAddress => $strName){
 							$resPHPMailer->addAddress($strEmailAddress, $strName);
 						}
 					}
 
-					if(array_key_exists('cc',$resEmail->arrEmailData) && is_array($resEmail->arrEmailData['cc']) && count($resEmail->arrEmailData['cc']) > 0){
-						foreach($resEmail->arrEmailData['cc'] as $strEmailAddress => $strName){
+					if(array_key_exists('cc',$arrEmailData) && is_array($arrEmailData['cc']) && count($arrEmailData['cc']) > 0){
+						foreach($arrEmailData['cc'] as $strEmailAddress => $strName){
 							$resPHPMailer->addCC($strEmailAddress, $strName);
 						}
 					}
 
-					if(array_key_exists('bcc',$resEmail->arrEmailData) && is_array($resEmail->arrEmailData['bcc']) && count($resEmail->arrEmailData['bcc']) > 0){
-						foreach($resEmail->arrEmailData['bcc'] as $strEmailAddress => $strName){
+					if(array_key_exists('bcc',$arrEmailData) && is_array($arrEmailData['bcc']) && count($arrEmailData['bcc']) > 0){
+						foreach($arrEmailData['bcc'] as $strEmailAddress => $strName){
 							$resPHPMailer->addBCC($strEmailAddress, $strName);
 						}
 					}
@@ -74,10 +75,10 @@
 
 					$resPHPMailer->IsHTML(true);
 
-					$resPHPMailer->Subject = $resEmail->arrEmailData['subject'];
-					$resPHPMailer->Body = $resEmail->arrEmailData['body_html'];
-					$resPHPMailer->MsgHTML = $resEmail->arrEmailData['body_html'];
-					$resPHPMailer->AltBody = $resEmail->arrEmailData['body_plain'];
+					$resPHPMailer->Subject = $arrEmailData['subject'];
+					$resPHPMailer->Body = $arrEmailData['body_html'];
+					$resPHPMailer->MsgHTML = $arrEmailData['body_html'];
+					$resPHPMailer->AltBody = $arrEmailData['body_plain'];
 
 					if($resPHPMailer->send()){
 						$blStatus = true;
