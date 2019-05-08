@@ -81,12 +81,18 @@
 					//$resPHPMailer->Debugoutput = function($str, $level) {echo "debug level $level; message: $str";};
 					//$resPHPMailer->Debugoutput = 'echo';
 
-					$resPHPMailer->IsHTML(true);
-
 					$resPHPMailer->Subject = $arrEmailData['subject'];
-					$resPHPMailer->Body = $arrEmailData['body_html'];
-					$resPHPMailer->MsgHTML = $arrEmailData['body_html'];
-					$resPHPMailer->AltBody = $arrEmailData['body_plain'];
+
+					if(array_key_exists('body_html',$arrEmailData) && $arrEmailData['body_html'] != ''){
+						$resPHPMailer->IsHTML(true);
+						$resPHPMailer->Body = $arrEmailData['body_html'];
+						$resPHPMailer->MsgHTML = $arrEmailData['body_html'];
+						$resPHPMailer->AltBody = $arrEmailData['body_plain'];
+					}else{
+						$resPHPMailer->IsHTML(false);
+						$resPHPMailer->Body = $arrEmailData['body_plain'];
+						$resPHPMailer->AltBody = $arrEmailData['body_plain'];
+					}
 
 					if($resPHPMailer->send()){
 						$blStatus = true;
